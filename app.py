@@ -1,30 +1,32 @@
 from flask import Flask, render_template
-
+import socket
 app = Flask(__name__)
+HOST = "172.20.10.2"	## Ip del servidor
+PORT = 12345			## Puerto del servidor
+
+def leer_sensor():
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((HOST, PORT))
+            data = s.recv(1024).decode().strip()
+            print("RECIBIDO:", data)
+            ejeX, ejeY = data.split(',')
+            ejeX = float(ejeX.replace('X:', ''))
+            ejeY = float(ejeY.replace('Y:', ''))
+            return ejeX, ejeY
+
+    except Exception as e:
+        print("ERROR:", e)
+        return 0, 0
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-@app.route('/base')
-def base():
-    return render_template('base.html')
-
-@app.route('/info')
-def info():
-    return render_template('info.html')
-
-@app.route('/mensaje')
-def mensaje():
-    return render_template('mensaje.html')
-
-@app.route('/web1')
-def web1():
-    return render_template('web1.html')
-
-@app.route('/web2')
-def web2():
-    return render_template('web2.html')
-
+    ejeY, ejeX = leer_sensor() #órden ejes.
+    return render_template(
+        'index.html',
+        ejeX=ejeX,
+        ejeY=ejeY
+    )
 if __name__ == '__main__':
-    app.run(port=8080, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+ 
