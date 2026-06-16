@@ -1,17 +1,3 @@
-# Visualización de Datos X-Y con Flask
-
-Alumno: Diego Núñez  
-Correo: diegoxdd2000@gmail.com
-
-Proyecto desarrollado para la asignatura Desarrollo de Software para Hardware.
-
-El sistema recibe datos X e Y desde una aplicación móvil y los representa en una interfaz web mediante Flask.
-
-Repositorio base utilizado:
-Actividad-dataXY-base del docente.
-
----
-
 # Actividad Base: Flask + DataXY
 
 Este repositorio es un ejemplo inicial para practicar con **Flask** y **GitHub**.
