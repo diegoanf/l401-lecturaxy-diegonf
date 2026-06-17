@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="1">
+
+    <title>Matriz X-Y | Diego Núñez</title>
+
+    <style>
+        #pagina {
+            margin: 0;
+            padding: 30px;
+            background-color: #10151d;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #titulo {
+            margin-bottom: 5px;
+            color: #7ef0a5;
+        }
+
+        #nombre {
+            margin-top: 5px;
+            color: #dce8f2;
+        }
+
+        #explicacion {
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #18212c;
+            border-radius: 10px;
+            line-height: 1.5;
+        }
+
+        #valores {
+            width: 420px;
+            margin: 20px auto;
+            padding: 12px;
+            background-color: #18212c;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        #matriz {
+            display: grid;
+            grid-template-columns: repeat(4, 85px);
+            grid-template-rows: repeat(4, 85px);
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        #celda00,
+        #celda01,
+        #celda02,
+        #celda03,
+        #celda10,
+        #celda11,
+        #celda12,
+        #celda13,
+        #celda20,
+        #celda21,
+        #celda22,
+        #celda23,
+        #celda30,
+        #celda31,
+        #celda32,
+        #celda33,
+        #activa {
+            width: 85px;
+            height: 85px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            background-color: #edf3f7;
+            color: #111820;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        #activa {
+            background-color: #39db78;
+            color: #07150c;
+            border: 4px solid #d7ffe5;
+            box-shadow: 0 0 22px #39db78;
+        }
+
+        #contenedorBoton {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        #botonInicio {
+            padding: 13px 25px;
+            background-color: #7ef0a5;
+            color: #10151d;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        #botonInicio:hover {
+            background-color: #ffffff;
+        }
+
+        #estadoError {
+            width: 360px;
+            margin: 15px auto;
+            padding: 10px;
+            background-color: #702626;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body id="pagina">
+
+    <h1 id="titulo">Matriz de Posición X-Y 4×4</h1>
+
+    <h2 id="nombre">Diego Alonso Núñez Falcon</h2>
+
+    <p id="explicacion">
+        Los valores recibidos desde el celular se limitan al rango entre -10 y 10.
+        Después se transforman en coordenadas entre 0 y 3. La celda verde
+        representa la posición calculada para los ejes X e Y.
+    </p>
+
+    {% if not conexionCorrecta %}
+        <p id="estadoError">
+            Sin lectura válida: se está mostrando la posición correspondiente a 0,0
+        </p>
+    {% endif %}
+
+    <p id="valores">
+        Valor X: {{ "%.2f"|format(ejeX) }}
+        &nbsp; | &nbsp;
+        Valor Y: {{ "%.2f"|format(ejeY) }}
+        &nbsp; | &nbsp;
+        Celda: {{ x }},{{ y }}
+    </p>
+
+    <div id="matriz">
+
+        {% for fila in range(3, -1, -1) %}
+
+            {% for columna in range(4) %}
+
+                <div
+                    id="{% if columna == x and fila == y %}activa{% else %}celda{{ fila }}{{ columna }}{% endif %}"
+                >
+                    {{ columna }},{{ fila }}
+                </div>
+
+            {% endfor %}
+
+        {% endfor %}
+
+    </div>
+
+    <div id="contenedorBoton">
+        <a id="botonInicio" href="{{ url_for('index') }}">
+            ← Volver a valores X/Y
+        </a>
+    </div>
+
+</body>
+</html>

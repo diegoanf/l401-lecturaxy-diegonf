@@ -1,107 +1,100 @@
-# Actividad Base: Flask + DataXY
+# Visualización de Datos X-Y con Flask
 
-Este repositorio es un ejemplo inicial para practicar con **Flask** y **GitHub**.
-La intensión es que los estudiantes lo usen como punto de partida, lo modifiquen y luego lo suban a su propio repositorio.
+## Alumno
 
----
+Diego Alonso Núñez Falcon
 
-## Objetivo
+## Correo
 
-* Clonar el repositorio y trabajar en una copia personal
-* Ejecutar Flask y recibir datos **x, y** desde una aplicación móvil
-* Visualizar datos en una página HTML sencilla
-* Subir cambios a GitHub
+[diegoxdd2000@gmail.com](mailto:diegoxdd2000@gmail.com)
 
----
+## Descripción
 
-## Requisitos
+Proyecto desarrollado para la asignatura Desarrollo de Software para Hardware.
 
-* Entorno para Python y Flask instalados
-* Cuenta en GitHub
-* Aplicación móvil (APK) para enviar datos
+La aplicación recibe datos de los ejes X e Y desde una aplicación móvil mediante una conexión TCP. Los valores se muestran en una aplicación web creada con Flask y se representan también en una matriz de posición 4×4.
 
----
+## Objetivos
 
-## Descarga de Aplicación APK
+* Recibir datos X e Y desde una aplicación móvil.
+* Mostrar los valores numéricos en una página web.
+* Actualizar la información automáticamente sin utilizar JavaScript.
+* Escalar las lecturas a coordenadas dentro de una matriz 4×4.
+* Encender la celda correspondiente a la posición X-Y.
+* Permitir la navegación entre la vista de valores y la vista de matriz.
 
-Se puede descargar la aplicación móvil desde aquí:
+## Tecnologías utilizadas
 
-[Descargar XYaTCPfull.apk](./XYaTCPfull.apk)
+* Python 3
+* Flask
+* HTML5
+* CSS3
+* Jinja2
+* Sockets TCP
+* Git y GitHub
 
----
+## Restricciones consideradas
 
-## Pasos básicos
+* No se utiliza JavaScript.
+* No se utiliza la etiqueta script.
+* El CSS está definido dentro de la etiqueta head.
+* Las referencias CSS utilizan identificadores id.
+* La APK no se almacena en el repositorio personal.
 
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/jotaefepece/Actividad-dataXY-base
-cd Actividad-dataXY-base
-```
-
-### 2. Instalar y ejecutar la aplicación apk
-
-```bash
-### La red del celular tiene que estar en la misma red local ###
-```
-
-### 3. Ejecutar Flask
-
-```bash
-python3 app.py
-```
-
-### 4. Probar en el navegador
+## Estructura del proyecto
 
 ```
-http://127.0.0.1:5000
-```
-
----
-
-## Estructura del ejercicio
-
-```bash
 .
 ├── app.py
-├── capturas
-│   ├── archivos-base.png
-│   └── vista-base.png
 ├── README.md
 ├── templates
-│   └── index.html
-└── XYaTCPfull.apk
+│   ├── index.html
+│   └── matrix.html
+└── capturas
+    ├── vista-principal.png
+    └── vista-matriz.png
 ```
 
----
+## Funcionamiento
 
-## Capturas
+La ruta principal muestra los valores actuales de X e Y.
 
-### Estructura de archivos
+La ruta `/matrix` transforma los valores recibidos, cuyo rango esperado se encuentra aproximadamente entre -10 y 10, en coordenadas enteras entre 0 y 3.
 
-![Estructura de los archivos](capturas/archivos-base.png)
+La matriz contiene 16 celdas. La celda correspondiente a la posición calculada se ilumina en color verde.
 
----
+## Ejecución
 
-### Vista en el navegador
+Activar el entorno virtual:
 
-![Vista HTML](capturas/vista-base.png)
+```
+source entorno-l401/bin/activate
+```
 
----
+Ejecutar Flask:
 
-## Inicio del ejercicio
+```
+python app.py
+```
 
-Cada estudiante debe:
+Abrir en el navegador:
 
-* Crear una pestaña en Flask que muestre un dato recibido
-* Modificar el HTML para encender una celda en un rectángulo **2x2** según los valores **x, y**
-* Subir su versión modificada a su propio repositorio
+```
+http://127.0.0.1:8080
+```
 
----
+Vista de la matriz:
 
-## Notas
+```
+http://127.0.0.1:8080/matrix
+```
 
-* Este README es solo una guía básica.
-* El trabajo final depende de cada estudiante y de cómo adapte el ejercicio.
+## Referencias
 
----
+* Repositorio base proporcionado por el docente.
+* Referencia de estructura y representación: `schweineorgel/l401-lecturaxy`.
+
+## Autor
+
+Diego Alonso Núñez Falcon
+Desarrollo de Software para Hardware
